@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PS4// Jailbreak  // Goldhen</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #12365b, #080e19 65%);
+  color: #e8f2ff;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 22px;
+  text-align: center;
+  background: #050c17;
+  border-bottom: 1px solid #24415e;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+header span {
+  color: #39adff;
+}
+
+main {
+  width: 92%;
+  max-width: 760px;
+  margin: 35px auto;
+}
+
+.card {
+  background: #0c1727;
+  border: 1px solid #24527c;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 18px 60px #0008;
+}
+
+h1 {
+  text-align: center;
+  font-size: 34px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #a9bdd3;
+}
+
+.firmware {
+  text-align: center;
+  color: #6dc3ff;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 25px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.status {
+  background: #091421;
+  border: 1px solid #1e3852;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.status small {
+  display: block;
+  color: #8fa8c2;
+  margin-bottom: 6px;
+}
+
+.status strong {
+  font-size: 14px;
+}
+
+.ok { color: #78d6a0; }
+.warn { color: #ffd078; }
+.error { color: #ff918c; }
+
+button {
+  width: 100%;
+  padding: 20px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #0879cf, #18aaff);
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+
+button:disabled {
+  opacity: .5;
+}
+
+.note {
+  margin-top: 20px;
+  padding: 12px;
+  background: #111b29;
+  border-left: 3px solid #d7a84e;
+  color: #a9bdd3;
+  font-size: 13px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #71859c;
+  font-size: 11px;
+}
+
+@media(max-width:520px) {
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  PS4 <span>INDEPENDENT JAILBREAK</span>
+</header>
+
+<main>
+<section class="card">
+
+  <h1>PS4 JAILBREAK</h1>
+
+  <p class="subtitle">
+    Host independente baseado no projeto Raw13G
+  </p>
+
+  <div class="firmware" id="firmware">
+    Detectando firmware...
+  </div>
+
+  <div class="status-grid">
+
+    <div class="status">
+      <small>Firmware detectado</small>
+      <strong id="fwStatus">Verificando...</strong>
+    </div>
+
+    <div class="status">
+      <small>Arquivos do host</small>
+      <strong id="filesStatus">Não verificados</strong>
+    </div>
+
+    <div class="status">
+      <small>Cache offline</small>
+      <strong id="cacheStatus">Verificando...</strong>
+    </div>
+
+    <div class="status">
+      <small>Estado do exploit</small>
+      <strong id="exploitStatus">Aguardando início</strong>
+    </div>
+
+  </div>
+
+  <button id="startBtn">
+    INICIAR DESBLOQUEIO
+  </button>
+
+  <div class="note">
+    Atenção: o patch 13.50 do projeto original
+    está marcado como não testado em hardware.
+    Não há garantia de sucesso.
+  </div>
+
+</section>
+</main>
+
+<footer>
+  PS4 Jailbreak Goldhen
+</footer>
+
+<script>
+(function () {
+
+  const $ = id => document.getElementById(id);
+
+  const ua = navigator.userAgent || "";
+  const match = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(ua);
+
+  let firmware = null;
+
+  if (match) {
+    firmware = match[1] + "." +
+      parseInt(match[2], 16).toString(16).padStart(2, "0");
+  }
+
+  $("firmware").textContent =
+    firmware ? "FIRMWARE " + firmware : "FIRMWARE NÃO DETECTADO";
+
+  $("fwStatus").textContent =
+    firmware || "Navegador não identificado";
+
+  $("fwStatus").className =
+    firmware === "13.50" ? "warn" : "error";
+
+  if (firmware === "13.50") {
+    $("filesStatus").textContent =
+      "Patch listado, não testado em hardware";
+    $("filesStatus").className = "warn";
+  } else {
+    $("filesStatus").textContent =
+      "Compatibilidade não confirmada";
+    $("filesStatus").className = "error";
+  }
+
+  const cache = window.applicationCache;
+
+  if (!cache) {
+    $("cacheStatus").textContent =
+      "API de cache indisponível";
+    $("cacheStatus").className = "warn";
+  } else {
+    $("cacheStatus").textContent =
+      "Estado: " + cache.status;
+  }
+
+  $("startBtn").addEventListener("click", function () {
+
+    const confirmacao = confirm(
+      "O exploit pode travar ou reiniciar o PS4. " +
+      "O patch 13.50 não foi testado em hardware. " +
+      "Deseja continuar?"
+    );
+
+    if (!confirmacao) return;
+
+    $("exploitStatus").textContent =
+      "Solicitação iniciada";
+
+    $("exploitStatus").className = "warn";
+
+    this.disabled = true;
+
+    location.href = "jb.html?log=1";
+
+  });
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" manifest="cache.appcache">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d18">
+
+    <title>PS4 Jailbreak Goldhen  | Exploit Host</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(ellipse at top, #142c50 0%, transparent 55%),
+                linear-gradient(135deg, #050914, #0b1425);
+            color: #eaf4ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #wrap {
+            width: 90%;
+            max-width: 650px;
+            padding: 40px 25px;
+            border: 1px solid #1d5b91;
+            border-radius: 18px;
+            background: rgba(7, 17, 33, .94);
+            box-shadow: 0 0 35px #0066aa33;
+        }
+
+        .brand {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: #42baff;
+            text-shadow: 0 0 18px #008cff;
+        }
+
+        .subtitle {
+            color: #8daac7;
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-top: 10px;
+        }
+
+        #spin {
+            width: 65px;
+            height: 65px;
+            margin: 30px auto 20px;
+            border: 5px solid #193b59;
+            border-top: 5px solid #31baff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #msg {
+            font-size: 17px;
+            color: #d9edff;
+            margin: 20px 0;
+            min-height: 25px;
+        }
+
+        #state {
+            color: #43c5ff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-top: 15px;
+        }
+
+        #startButton {
+            margin-top: 25px;
+            width: 100%;
+            max-width: 320px;
+            padding: 17px 25px;
+            border: 1px solid #42baff;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #0876c9, #13b9ed);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 0 20px #008cff55;
+        }
+
+        #startButton:active {
+            transform: scale(.97);
+        }
+
+        #startButton:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        #out {
+            margin-top: 25px;
+            padding: 15px;
+            background: #050b14;
+            border: 1px solid #183957;
+            border-radius: 8px;
+            color: #9cc9e9;
+            font-family: monospace;
+            text-align: left;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        body.done #spin {
+            border-color: #1b6649;
+            border-top-color: #42e69b;
+            animation: none;
+        }
+
+        body.done #state { color: #42e69b; }
+
+        body.fail #spin {
+            border-color: #702c35;
+            border-top-color: #ff5365;
+            animation: none;
+        }
+
+        body.fail #state { color: #ff5365; }
+
+        body.log #out { display: block; }
+        body:not(.log) #out { display: none; }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #54718c;
+        }
+    </style>
+</head>
+
+<body>
+    <main id="wrap">
+
+        <div class="brand">PS4 INDEPENDENT</div>
+        <div class="subtitle">INDEPENDENT EXPLOIT HOST</div>
+
+        <div id="spin"></div>
+
+        <div id="msg">
+            Pronto para iniciar.
+        </div>
+
+        <div id="state">
+            AGUARDANDO
+        </div>
+
+        <button id="startButton" type="button">
+            INICIAR DESBLOQUEIO
+        </button>
+
+        <pre id="out"></pre>
+
+        <div class="footer">
+            PS4 Jailbreak Goldhen <br>
+            Desbloqueio Rapido e Facil
+        </div>
+
+    </main>
+
+    <script type="module">
+        const button = document.getElementById("startButton");
+        const message = document.getElementById("msg");
+        const state = document.getElementById("state");
+
+        button.addEventListener("click", async () => {
+            button.disabled = true;
+            button.textContent = "INICIANDO...";
+            message.textContent = "Solicitação de início registrada.";
+            state.textContent = "AGUARDANDO INTEGRAÇÃO COM JB.JS";
+
+            // O exploit original ainda precisa ser adaptado
+            // para iniciar somente após esta ação do usuário.
+        });
+    </script>
+</body>
+</html>
