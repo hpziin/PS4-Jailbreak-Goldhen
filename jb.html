@@ -1,32 +1,36 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR" manifest="cache.appcache">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#080d18">
 
-    <title>PS4 Jailbreak Goldhen  | Exploit Host</title>
+    <title>PS4// Jailbreak // Goldhen</title>
 
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             background:
-                radial-gradient(ellipse at top, #142c50 0%, transparent 55%),
+                radial-gradient(ellipse at top, #142c50, transparent 55%),
                 linear-gradient(135deg, #050914, #0b1425);
             color: #eaf4ff;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             text-align: center;
         }
 
         #wrap {
-            width: 90%;
+            width: 100%;
             max-width: 650px;
             padding: 40px 25px;
             border: 1px solid #1d5b91;
@@ -36,71 +40,48 @@
         }
 
         .brand {
-            font-size: 32px;
+            font-size: clamp(21px, 5vw, 29px);
             font-weight: bold;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             color: #42baff;
             text-shadow: 0 0 18px #008cff;
         }
 
         .subtitle {
+            margin-top: 12px;
             color: #8daac7;
             font-size: 12px;
-            letter-spacing: 3px;
-            margin-top: 10px;
+            letter-spacing: 4px;
         }
 
         #spin {
             width: 65px;
             height: 65px;
-            margin: 30px auto 20px;
+            margin: 35px auto 25px;
             border: 5px solid #193b59;
-            border-top: 5px solid #31baff;
+            border-top-color: #31baff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         #msg {
-            font-size: 17px;
-            color: #d9edff;
-            margin: 20px 0;
             min-height: 25px;
+            margin: 20px 0;
+            color: #d9edff;
+            font-size: 17px;
         }
 
         #state {
+            margin-top: 15px;
             color: #43c5ff;
             font-size: 13px;
             letter-spacing: 2px;
-            margin-top: 15px;
-        }
-
-        #startButton {
-            margin-top: 25px;
-            width: 100%;
-            max-width: 320px;
-            padding: 17px 25px;
-            border: 1px solid #42baff;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #0876c9, #13b9ed);
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 0 0 20px #008cff55;
-        }
-
-        #startButton:active {
-            transform: scale(.97);
-        }
-
-        #startButton:disabled {
-            opacity: .5;
-            cursor: not-allowed;
         }
 
         #out {
@@ -111,81 +92,122 @@
             border-radius: 8px;
             color: #9cc9e9;
             font-family: monospace;
+            font-size: 12px;
             text-align: left;
             white-space: pre-wrap;
             overflow-wrap: anywhere;
         }
 
-        body.done #spin {
-            border-color: #1b6649;
-            border-top-color: #42e69b;
-            animation: none;
-        }
-
-        body.done #state { color: #42e69b; }
-
+        body.done #spin,
         body.fail #spin {
-            border-color: #702c35;
-            border-top-color: #ff5365;
-            animation: none;
+            display: none;
         }
 
-        body.fail #state { color: #ff5365; }
+        body.done #state {
+            color: #42e69b;
+        }
 
-        body.log #out { display: block; }
-        body:not(.log) #out { display: none; }
+        body.fail #state {
+            color: #ff5365;
+        }
+
+        body.log #out {
+            display: block;
+        }
+
+        body:not(.log) #out {
+            display: none;
+        }
 
         .footer {
             margin-top: 30px;
-            font-size: 11px;
             color: #54718c;
+            font-size: 11px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 
 <body>
+
     <main id="wrap">
 
-        <div class="brand">PS4 INDEPENDENT</div>
-        <div class="subtitle">INDEPENDENT EXPLOIT HOST</div>
+        <div class="brand">
+            PS4// Jailbreak // Goldhen
+        </div>
+
+        <div class="subtitle">
+            INDEPENDENT EXPLOIT HOST
+        </div>
 
         <div id="spin"></div>
 
         <div id="msg">
-            Pronto para iniciar.
+            Inicializando sistema...
         </div>
 
         <div id="state">
-            AGUARDANDO
+            INICIANDO
         </div>
-
-        <button id="startButton" type="button">
-            INICIAR DESBLOQUEIO
-        </button>
 
         <pre id="out"></pre>
 
         <div class="footer">
-            PS4 Jailbreak Goldhen <br>
-            Desbloqueio Rapido e Facil
+            PS4 JAILBREAK PROJECT
+            <br><br>
+            GOLDHEN INTERFACE
         </div>
 
     </main>
 
-    <script type="module">
-        const button = document.getElementById("startButton");
-        const message = document.getElementById("msg");
-        const state = document.getElementById("state");
+    <!-- Monitoramento do processo -->
+    <script>
+        (() => {
+            let encerrado = false;
 
-        button.addEventListener("click", async () => {
-            button.disabled = true;
-            button.textContent = "INICIANDO...";
-            message.textContent = "Solicitação de início registrada.";
-            state.textContent = "AGUARDANDO INTEGRAÇÃO COM JB.JS";
+            const body = document.body;
 
-            // O exploit original ainda precisa ser adaptado
-            // para iniciar somente após esta ação do usuário.
-        });
+            const observador = new MutationObserver(() => {
+                const sucesso = body.classList.contains("done");
+                const falha = body.classList.contains("fail");
+
+                if (!sucesso && !falha) return;
+
+                observador.disconnect();
+
+                if (encerrado) return;
+                encerrado = true;
+
+                const msg = document.getElementById("msg");
+                const state = document.getElementById("state");
+
+                if (sucesso) {
+                    msg.textContent = "Processo concluído!";
+                    state.textContent = "FINALIZADO";
+                } else {
+                    msg.textContent = "O processo terminou com falha.";
+                    state.textContent = "FALHA";
+                }
+
+                setTimeout(() => {
+                    window.close();
+
+                    msg.textContent +=
+                        " Se a página continuar aberta, feche manualmente.";
+                }, 2500);
+            });
+
+            observador.observe(body, {
+                attributes: true,
+                attributeFilter: ["class"]
+            });
+        })();
     </script>
+
+    <!-- Inicialização do código original -->
+    <script type="module">
+        import "./jb.js?v=19";
+    </script>
+
 </body>
 </html>
